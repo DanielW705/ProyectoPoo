@@ -1,0 +1,15 @@
+C:\Users\danie\source\repos\pruebaTetris\bin\Debug\netcoreapp3.1\pruebaTetris.exe
+C:\Users\danie\source\repos\pruebaTetris\bin\Debug\netcoreapp3.1\pruebaTetris.deps.json
+C:\Users\danie\source\repos\pruebaTetris\bin\Debug\netcoreapp3.1\pruebaTetris.runtimeconfig.json
+C:\Users\danie\source\repos\pruebaTetris\bin\Debug\netcoreapp3.1\pruebaTetris.runtimeconfig.dev.json
+C:\Users\danie\source\repos\pruebaTetris\bin\Debug\netcoreapp3.1\pruebaTetris.dll
+C:\Users\danie\source\repos\pruebaTetris\bin\Debug\netcoreapp3.1\pruebaTetris.pdb
+C:\Users\danie\source\repos\pruebaTetris\obj\Debug\netcoreapp3.1\pruebaTetris.csprojAssemblyReference.cache
+C:\Users\danie\source\repos\pruebaTetris\obj\Debug\netcoreapp3.1\pruebaTetris.Form1.resources
+C:\Users\danie\source\repos\pruebaTetris\obj\Debug\netcoreapp3.1\pruebaTetris.csproj.GenerateResource.cache
+C:\Users\danie\source\repos\pruebaTetris\obj\Debug\netcoreapp3.1\pruebaTetris.AssemblyInfoInputs.cache
+C:\Users\danie\source\repos\pruebaTetris\obj\Debug\netcoreapp3.1\pruebaTetris.AssemblyInfo.cs
+C:\Users\danie\source\repos\pruebaTetris\obj\Debug\netcoreapp3.1\pruebaTetris.csproj.CoreCompileInputs.cache
+C:\Users\danie\source\repos\pruebaTetris\obj\Debug\netcoreapp3.1\pruebaTetris.dll
+C:\Users\danie\source\repos\pruebaTetris\obj\Debug\netcoreapp3.1\pruebaTetris.pdb
+C:\Users\danie\source\repos\pruebaTetris\obj\Debug\netcoreapp3.1\pruebaTetris.genruntimeconfig.cache
