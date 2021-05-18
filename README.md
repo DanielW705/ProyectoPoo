@@ -1,2 +1,2 @@
 # ProyectoPoo
-##Este es el branch del ALEXIS; solo lo toca el alexis
+##Este es el branch del OCHOA; solo lo toca OCHOA
