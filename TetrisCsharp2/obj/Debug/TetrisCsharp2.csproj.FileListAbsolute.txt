@@ -1,0 +1,10 @@
+C:\Users\danie\source\repos\TetrisCsharp2\bin\Debug\TetrisCsharp2.exe.config
+C:\Users\danie\source\repos\TetrisCsharp2\bin\Debug\TetrisCsharp2.exe
+C:\Users\danie\source\repos\TetrisCsharp2\bin\Debug\TetrisCsharp2.pdb
+C:\Users\danie\source\repos\TetrisCsharp2\obj\Debug\TetrisCsharp2.csprojAssemblyReference.cache
+C:\Users\danie\source\repos\TetrisCsharp2\obj\Debug\TetrisCsharp2.Properties.Resources.resources
+C:\Users\danie\source\repos\TetrisCsharp2\obj\Debug\TetrisCsharp2.csproj.GenerateResource.cache
+C:\Users\danie\source\repos\TetrisCsharp2\obj\Debug\TetrisCsharp2.csproj.CoreCompileInputs.cache
+C:\Users\danie\source\repos\TetrisCsharp2\obj\Debug\TetrisCsharp2.exe
+C:\Users\danie\source\repos\TetrisCsharp2\obj\Debug\TetrisCsharp2.pdb
+C:\Users\danie\source\repos\TetrisCsharp2\obj\Debug\TetrisCsharp2.Form1.resources
