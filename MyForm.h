@@ -37,11 +37,15 @@ namespace Tetriscplusplus {
 
 	protected:
 
+	private: System::ComponentModel::IContainer^ components;
+
+	protected:
+
 	private:
 		/// <summary>
 		/// Variable del diseñador necesaria.
 		/// </summary>
-		System::ComponentModel::Container^ components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
