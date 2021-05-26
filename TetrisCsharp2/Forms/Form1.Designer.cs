@@ -32,6 +32,10 @@ namespace TetrisCsharp2
             this.components = new System.ComponentModel.Container();
             this.RELOJ = new System.Windows.Forms.Timer(this.components);
             this.MovPiesas = new System.Windows.Forms.Timer(this.components);
+            this.mostrarPuntuaciones = new System.Windows.Forms.Panel();
+            this.TiTulo = new System.Windows.Forms.Panel();
+            this.panelDepuntuacion = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.PanelJuego = new System.Windows.Forms.Panel();
             this.lvly9 = new System.Windows.Forms.Label();
             this.lvly8 = new System.Windows.Forms.Label();
@@ -61,28 +65,60 @@ namespace TetrisCsharp2
             this.lvlx2 = new System.Windows.Forms.Label();
             this.lvlx1 = new System.Windows.Forms.Label();
             this.TOP = new System.Windows.Forms.Label();
-            this.mostrarPuntuaciones = new System.Windows.Forms.Panel();
-            this.TiTulo = new System.Windows.Forms.Panel();
-            this.panelDepuntuacion = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.PanelJuego.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.PanelJuego.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // RELOJ
-            // 
-            this.RELOJ.Tick += new System.EventHandler(this.RELOJ_Tick);
             // 
             // MovPiesas
             // 
-            this.MovPiesas.Interval = 2000;
+            this.MovPiesas.Interval = 500;
             this.MovPiesas.Tick += new System.EventHandler(this.MovPiesas_Tick);
+            // 
+            // mostrarPuntuaciones
+            // 
+            this.mostrarPuntuaciones.BackColor = System.Drawing.Color.DimGray;
+            this.mostrarPuntuaciones.Dock = System.Windows.Forms.DockStyle.Left;
+            this.mostrarPuntuaciones.Enabled = false;
+            this.mostrarPuntuaciones.Location = new System.Drawing.Point(0, 100);
+            this.mostrarPuntuaciones.Name = "mostrarPuntuaciones";
+            this.mostrarPuntuaciones.Size = new System.Drawing.Size(180, 838);
+            this.mostrarPuntuaciones.TabIndex = 0;
+            // 
+            // TiTulo
+            // 
+            this.TiTulo.BackColor = System.Drawing.Color.Gray;
+            this.TiTulo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.TiTulo.Location = new System.Drawing.Point(0, 0);
+            this.TiTulo.Name = "TiTulo";
+            this.TiTulo.Size = new System.Drawing.Size(1256, 100);
+            this.TiTulo.TabIndex = 3;
+            // 
+            // panelDepuntuacion
+            // 
+            this.panelDepuntuacion.BackColor = System.Drawing.Color.DimGray;
+            this.panelDepuntuacion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panelDepuntuacion.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelDepuntuacion.Enabled = false;
+            this.panelDepuntuacion.Location = new System.Drawing.Point(1076, 100);
+            this.panelDepuntuacion.Name = "panelDepuntuacion";
+            this.panelDepuntuacion.Size = new System.Drawing.Size(180, 838);
+            this.panelDepuntuacion.TabIndex = 4;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.DimGray;
+            this.panel1.Controls.Add(this.PanelJuego);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(180, 100);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(896, 838);
+            this.panel1.TabIndex = 5;
             // 
             // PanelJuego
             // 
             this.PanelJuego.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.PanelJuego.BackgroundImage = global::TetrisCsharp2.Properties.Resources.p_1;
-            this.PanelJuego.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PanelJuego.BackgroundImage = global::TetrisCsharp2.Properties.Resources.Fondo;
+            this.PanelJuego.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.PanelJuego.Controls.Add(this.lvly9);
             this.PanelJuego.Controls.Add(this.lvly8);
             this.PanelJuego.Controls.Add(this.lvly7);
@@ -370,45 +406,6 @@ namespace TetrisCsharp2
             this.TOP.Size = new System.Drawing.Size(820, 2);
             this.TOP.TabIndex = 12;
             // 
-            // mostrarPuntuaciones
-            // 
-            this.mostrarPuntuaciones.BackColor = System.Drawing.Color.DimGray;
-            this.mostrarPuntuaciones.Dock = System.Windows.Forms.DockStyle.Left;
-            this.mostrarPuntuaciones.Enabled = false;
-            this.mostrarPuntuaciones.Location = new System.Drawing.Point(0, 100);
-            this.mostrarPuntuaciones.Name = "mostrarPuntuaciones";
-            this.mostrarPuntuaciones.Size = new System.Drawing.Size(180, 838);
-            this.mostrarPuntuaciones.TabIndex = 0;
-            // 
-            // TiTulo
-            // 
-            this.TiTulo.BackColor = System.Drawing.Color.Gray;
-            this.TiTulo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TiTulo.Location = new System.Drawing.Point(0, 0);
-            this.TiTulo.Name = "TiTulo";
-            this.TiTulo.Size = new System.Drawing.Size(1256, 100);
-            this.TiTulo.TabIndex = 3;
-            // 
-            // panelDepuntuacion
-            // 
-            this.panelDepuntuacion.BackColor = System.Drawing.Color.DimGray;
-            this.panelDepuntuacion.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelDepuntuacion.Enabled = false;
-            this.panelDepuntuacion.Location = new System.Drawing.Point(1076, 100);
-            this.panelDepuntuacion.Name = "panelDepuntuacion";
-            this.panelDepuntuacion.Size = new System.Drawing.Size(180, 838);
-            this.panelDepuntuacion.TabIndex = 4;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.DimGray;
-            this.panel1.Controls.Add(this.PanelJuego);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(180, 100);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(896, 838);
-            this.panel1.TabIndex = 5;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -428,10 +425,9 @@ namespace TetrisCsharp2
             this.Text = "TETETRIS";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
-            this.PanelJuego.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.PanelJuego.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

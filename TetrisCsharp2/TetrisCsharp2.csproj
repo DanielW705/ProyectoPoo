@@ -95,5 +95,17 @@
   <ItemGroup>
     <None Include="Resources\p 1.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sin planetas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sin planetas1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Universo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fondo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

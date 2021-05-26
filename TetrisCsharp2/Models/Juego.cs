@@ -10,47 +10,30 @@ namespace TetrisCsharp2.Models
 {
     class Juego
     {
+        #region variable globales
+        // este enumerable se usa para que en el mapa se detecta si se esta moviendo o no
         public enum StateTertimno
         {
             vacio = 0,
             bajando = 1,
             estatico = 2
         }
+        #endregion
+        #region attributos
         // Este es el tablero en una matriz de 10 *16
         private StateTertimno[,] tablaDeJuego = new StateTertimno[10, 16];
         private int Volumen;
-        // Este es el controlador del Tetrimino
+        // Este atributo ya que es abstracto, solo quiero el tetrimino que esta jugando ahorita
         private Tetrimino TetriminoEnElCampo { get; set; }
         //Aqui esta el tetrimino que se va a guardar
         private Tetrimino TetriminoGuardado;
-        // Este Controlaremos el panel, para mandar las cosas
+        // Este Controlaremos el panel, para mostrar y lanzar los tetrimino
         private Panel InterfazDeJuego;
-        //private Timer cambioDeColor;
+        //Este reloj lo controla el movimiento de las piezas;
         private Timer movimientoDelTetrimino;
-        // este solo devuelve el la matriz 
-        public StateTertimno[,] _tablaDeJuego
-        {
-            get
-            {
-                return tablaDeJuego;
-            }
-        }
-        // Este controla el tetrimino en el campo y veremos que hacer con el
-        public Tetrimino _TETRIMINOENELCAMPO
-        {
-            set
-            {
-                if (_TETRIMINOENELCAMPO != null)
-                {
-                    TetriminoEnElCampo = _TETRIMINOENELCAMPO;
-                }
-            }
-            get
-            {
-                return TetriminoEnElCampo;
-            }
-        }
-        //Este es el constructor
+        #endregion
+        #region constructor
+        //Este es el constructor obtiene el panel y el reloj o Timer
         public Juego(Panel _InterfazDelJuego, Timer _movimientoDelTetrimino)
         {
             InterfazDeJuego = _InterfazDelJuego;
@@ -61,42 +44,126 @@ namespace TetrisCsharp2.Models
         {
 
         }
+        #endregion
+        #region metodos o funciones
+        //Aqui Se toma aleatoriamente que tetrimino se va a usar y cual se va a lanzar
+        public void LanzarTetrimino()
+        {
+            int rand = new Random().Next(2, 2);
+            // Aqui se selecciona aleatoriamente el numero del tetrimino
+            // En C++ es un "rand() % 6 + 1" para que de un aleatorio 
+            //int rand = new Random().Next(1, 6);
+            // Aqui se hace parceo de int al enumerable, no le hagan CASO
+            Tetrimino.TypesOfTetrimino types = (Tetrimino.TypesOfTetrimino)Enum.Parse(typeof(Models.Tetrimino.TypesOfTetrimino), rand.ToString());
+            // Envez de comparar enumerables, haganlo con numeros
+            if (types == Tetrimino.TypesOfTetrimino.TetriminoI)
+            {
+                // Se crea el nuevo tetrimino
+                TetriminoI piezaJugada = new TetriminoI(types);
+                // Se guarda en la variable, diciendo que esta en el campo
+                this.TetriminoEnElCampo = piezaJugada;
+            }
+            else if (types == Tetrimino.TypesOfTetrimino.TetriminoJ)
+            {
+                // Se crea el nuevo tetrimino
+                TetriminoJ piezaJugada = new TetriminoJ(types);
+                // Se guarda en la variable, diciendo que esta en el campo
+                this.TetriminoEnElCampo = piezaJugada;
+
+            }
+            else if (types == Tetrimino.TypesOfTetrimino.TetriminoL)
+            {
+                // Se crea el nuevo tetrimino
+                TetriminoL piezaJugada = new TetriminoL(types);
+                // Se guarda en la variable, diciendo que esta en el campo
+                this.TetriminoEnElCampo = piezaJugada;
+            }
+            else if (types == Tetrimino.TypesOfTetrimino.TetriminoO)
+            {
+                // Se crea el nuevo tetrimino
+                TetriminoO piezaJugada = new TetriminoO(types);
+                // Se guarda en la variable, diciendo que esta en el campo
+                this.TetriminoEnElCampo = piezaJugada;
+            }
+            else if (types == Tetrimino.TypesOfTetrimino.TetriminoT)
+            {
+                // Se crea el nuevo tetrimino
+                TetriminoT piezaJugada = new TetriminoT(types);
+                // Se guarda en la variable, diciendo que esta en el campo
+                this.TetriminoEnElCampo = piezaJugada;
+            }
+            else if (types == Tetrimino.TypesOfTetrimino.TetriminoZ)
+            {
+                // Se crea el nuevo tetrimino
+                TetriminoZ piezaJugada = new TetriminoZ(types);
+                // Se guarda en la variable, diciendo que esta en el campo
+                this.TetriminoEnElCampo = piezaJugada;
+            }
+            // LLama al panel, y le agrega los label al panel
+            this.InterfazDeJuego.Controls.AddRange(this.TetriminoEnElCampo._figura);
+            //El for each dice que por cada objeto (en este caso una tupla), en este caso en el arreglo
+            foreach ((int, int) tupla in TetriminoEnElCampo._posicion)
+            {
+                // En la matriz en la ubicacion de la creacion va a decir que 
+                tablaDeJuego[tupla.Item1, tupla.Item2] = StateTertimno.bajando;
+            }
+            // Aqui inicia el conteo el reloj
+            movimientoDelTetrimino.Start();
+        }
         // Aqui se inciara el juego lanzando un primer tetrimino
         public void IniciarJuego()
         {
             LanzarTetrimino();
         }
-        // Reliza una comparacion
+        // En esta parte detiene el tetrimino
         public void DetenerTetrimino()
         {
-            for (int i = 3; i > -1; i--)
-            {
-                tablaDeJuego[this.TetriminoEnElCampo._posicion[i].x, this.TetriminoEnElCampo._posicion[i].y] = StateTertimno.estatico;
-            }
-            this.TetriminoEnElCampo = null;
-            movimientoDelTetrimino.Stop();
-            LanzarTetrimino();
-        }
-        public void MoverTetriminoEjeY()
-        {
+            // El ciclo inicia de abajo hacia arriba
             for (int i = this.TetriminoEnElCampo._posicion.Length - 1; i > -1; i--)
             {
+                // En cada posicion le cambia el estado
+                tablaDeJuego[this.TetriminoEnElCampo._posicion[i].x, this.TetriminoEnElCampo._posicion[i].y] = StateTertimno.estatico;
+            }
+            // Borra el tetrimino en el campo
+            this.TetriminoEnElCampo = null;
+            //Detiene el reloj
+            movimientoDelTetrimino.Stop();
+            // Vuelve a lanzar el tetrimino
+            LanzarTetrimino();
+        }
+        // Con esta funcion mueve el tetrimino en eje Y
+        public void MoverTetriminoEjeY()
+        {
+            // Otra vez va de abajo hacia arriba
+            for (int i = this.TetriminoEnElCampo._posicion.Length - 1; i > -1; i--)
+            {
+                // En la posicion anterior lo pone que esta vacio
                 tablaDeJuego[this.TetriminoEnElCampo._posicion[i].x, this.TetriminoEnElCampo._posicion[i].y] = StateTertimno.vacio;
+                // Mueve el tetrimino en el eje Y osea hacia abajo
                 this.TetriminoEnElCampo._posicion[i].y += 1;
+                // En la nueva posicion se cambia de vacio a bajando
                 tablaDeJuego[this.TetriminoEnElCampo._posicion[i].x, this.TetriminoEnElCampo._posicion[i].y] = StateTertimno.bajando;
+                // Se sacan de la estructura el atributo x y y
                 int PosX = this.TetriminoEnElCampo._figura[i].Location.X;
                 int PosY = this.TetriminoEnElCampo._figura[i].Location.Y;
+                // Se crea una nueva estructura y mediante el constructor se pasa parametros
                 this.TetriminoEnElCampo._figura[i].Location = new Point(PosX, PosY + 50);
             }
         }
         public void MoverTetriminoEjeXDerecha()
         {
+            // Va de abajo hacia arriaba
             for (int i = this.TetriminoEnElCampo._posicion.Length - 1; i > -1; i--)
             {
+                // En la posicion anterior lo pone que esta vacio
                 tablaDeJuego[this.TetriminoEnElCampo._posicion[i].x, this.TetriminoEnElCampo._posicion[i].y] = StateTertimno.vacio;
+                // Mueve el tetrimino en el eje X osea hacia la derecha
                 this.TetriminoEnElCampo._posicion[i].x += 1;
+                // En la nueva posicion se cambia de vacio a bajando
                 tablaDeJuego[this.TetriminoEnElCampo._posicion[i].x, this.TetriminoEnElCampo._posicion[i].y] = StateTertimno.bajando;
+                // Se sacan de la estructura el atributo x y y
                 int PosX = this.TetriminoEnElCampo._figura[i].Location.X, PosY = this.TetriminoEnElCampo._figura[i].Location.Y;
+                // Se crea una nueva estructura y mediante el constructor se pasa parametros
                 this.TetriminoEnElCampo._figura[i].Location = new Point(PosX + 50, PosY);
             }
         }
@@ -104,94 +171,92 @@ namespace TetrisCsharp2.Models
         {
             for (int i = this.TetriminoEnElCampo._posicion.Length - 1; i > -1; i--)
             {
+                // En la posicion anterior lo pone que esta vacio
                 tablaDeJuego[this.TetriminoEnElCampo._posicion[i].x, this.TetriminoEnElCampo._posicion[i].y] = StateTertimno.vacio;
+                // Mueve el tetrimino en el eje X osea hacia la izquierda
                 this.TetriminoEnElCampo._posicion[i].x -= 1;
+                // En la nueva posicion se cambia de vacio a bajando
                 tablaDeJuego[this.TetriminoEnElCampo._posicion[i].x, this.TetriminoEnElCampo._posicion[i].y] = StateTertimno.bajando;
+                // Se sacan de la estructura el atributo x y y
                 int PosX = this.TetriminoEnElCampo._figura[i].Location.X, PosY = this.TetriminoEnElCampo._figura[i].Location.Y;
+                // Se crea una nueva estructura y mediante el constructor se pasa parametros
                 this.TetriminoEnElCampo._figura[i].Location = new Point(PosX - 50, PosY);
             }
         }
-        public StateTertimno[] QueHayEnfrente()
+        // Deberia de detectar si hay algo enfrente pero tiene errores
+        public bool SePuedeBajar()
         {
-            StateTertimno[] estados = new StateTertimno[4];
             for (int i = this.TetriminoEnElCampo._posicion.Length - 1; i > -1; i--)
             {
-                estados[i] = tablaDeJuego[this.TetriminoEnElCampo._posicion[i].x, this.TetriminoEnElCampo._posicion[i].y + 1];
+                if (tablaDeJuego[this.TetriminoEnElCampo._posicion[i].x, this.TetriminoEnElCampo._posicion[i].y + 1] == StateTertimno.estatico)
+                {
+                    return true;
+                }
             }
-            return estados;
+            return false;
         }
-        //Aqui realizara acto de aparicion el tetrimino
-        public void LanzarTetrimino()
+        public bool QueHayALaDerecha()
         {
-            int rand = new Random().Next(1, 1);
-            Tetrimino.TypesOfTetrimino types = (Tetrimino.TypesOfTetrimino)Enum.Parse(typeof(Models.Tetrimino.TypesOfTetrimino), rand.ToString());
-            if (types == Tetrimino.TypesOfTetrimino.TetriminoI)
+            for (int i = this.TetriminoEnElCampo._posicion.Length - 1; i > -1; i--)
             {
-                TetriminoI piezaJugada = new TetriminoI(types);
-                this.TetriminoEnElCampo = piezaJugada;
+                if (tablaDeJuego[this.TetriminoEnElCampo._posicion[i].x + 1, this.TetriminoEnElCampo._posicion[i].y] == StateTertimno.estatico)
+                {
+                    return true;
+                }
             }
-            else if (types == Tetrimino.TypesOfTetrimino.TetriminoJ)
-            {
-                TetriminoJ piezaJugada = new TetriminoJ(types);
-                this.TetriminoEnElCampo = piezaJugada;
-
-            }
-            else if (types == Tetrimino.TypesOfTetrimino.TetriminoL)
-            {
-                TetriminoL piezaJugada = new TetriminoL(types);
-                this.TetriminoEnElCampo = piezaJugada;
-            }
-            else if (types == Tetrimino.TypesOfTetrimino.TetriminoO)
-            {
-                TetriminoO piezaJugada = new TetriminoO(types);
-                this.TetriminoEnElCampo = piezaJugada;
-            }
-            else if (types == Tetrimino.TypesOfTetrimino.TetriminoT)
-            {
-                TetriminoT piezaJugada = new TetriminoT(types);
-                this.TetriminoEnElCampo = piezaJugada;
-            }
-            else if (types == Tetrimino.TypesOfTetrimino.TetriminoZ)
-            {
-                TetriminoZ piezaJugada = new TetriminoZ(types);
-                this.TetriminoEnElCampo = piezaJugada;
-            }
-            this.InterfazDeJuego.Controls.AddRange(this.TetriminoEnElCampo._figura);
-            foreach ((int, int) tupla in TetriminoEnElCampo._posicion)
-            {
-                tablaDeJuego[tupla.Item1, tupla.Item2] = StateTertimno.bajando;
-            }
-            //movimientoDelTetrimino.Start();
+            return false;
         }
-        // Aqui se debe actualizar el tablero
+        public bool QueHayALaIzquierda()
+        {
+            for (int i = this.TetriminoEnElCampo._posicion.Length - 1; i > -1; i--)
+            {
+                if (tablaDeJuego[this.TetriminoEnElCampo._posicion[i].x - 1, this.TetriminoEnElCampo._posicion[i].y] == StateTertimno.estatico)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        // En este metodo se va actualizando el tablero
         public void ActualizarTablero(Keys tecla = Keys.NoName)
         {
+            //Si presiona la tecla W o flecha arriba, el intervalo va a ser mas largo
             if (tecla == Keys.W || tecla == Keys.Up)
             {
+                //Se cambia el intervalo 
                 movimientoDelTetrimino.Interval = 1500;
             }
+            // Si es hacia abajo va a ser mas corto
             else if (tecla == Keys.S || tecla == Keys.Down)
             {
-                movimientoDelTetrimino.Interval = 200;
+                // Se cambia el intervalo
+                movimientoDelTetrimino.Interval = 10;
             }
             else if (tecla == Keys.A || tecla == Keys.Left)
             {
+                // Se usa Linq pra sacar el minimo del arreglo y se selecciona algo
+                // link para linq: https://www.codeproject.com/Articles/488177/cpplinq-LINQ-Query-Operators-for-Cplusplus-Sequenc
                 int MinX = TetriminoEnElCampo._posicion.Select(tuple => tuple.x).ToArray().Min();
-                if (MinX > 0)
+                //Si detecta uno a la izquierda ya no deja moverse
+                if (MinX > 0 && !QueHayALaIzquierda())
                 {
                     MoverTetriminoEjeXIzquierda();
                 }
             }
             else if (tecla == Keys.D || tecla == Keys.Right)
             {
+                // Se usa Linq pra sacar el minimo del arreglo y se selecciona algo
+                // link para linq: https://www.codeproject.com/Articles/488177/cpplinq-LINQ-Query-Operators-for-Cplusplus-Sequenc
                 int MaXx = TetriminoEnElCampo._posicion.Select(tuple => tuple.x).ToArray().Max();
-                if (MaXx < 9)
+                //Si detecta uno a la derecha ya no deja moverse
+                if (MaXx < 9 && !QueHayALaDerecha())
                 {
                     MoverTetriminoEjeXDerecha();
                 }
             }
             else if (tecla == Keys.Space)
             {
+                //Si teclea el espacio, rota y cambia todo
                 for (int i = this.TetriminoEnElCampo._posicion.Length - 1; i > -1; i--)
                 {
                     tablaDeJuego[this.TetriminoEnElCampo._posicion[i].x, this.TetriminoEnElCampo._posicion[i].y] = StateTertimno.vacio;
@@ -204,16 +269,13 @@ namespace TetrisCsharp2.Models
             }
             else
             {
-                StateTertimno[] estadosActual = QueHayEnfrente();
+                //En esta parete baja
                 int Maxy = TetriminoEnElCampo._posicion.Select(tuple => tuple.y).ToArray().Max();
-
-                if (Maxy < 14 &&
-                    estadosActual[0] != StateTertimno.estatico && estadosActual[1] != StateTertimno.estatico && estadosActual[2] != StateTertimno.estatico && estadosActual[3] != StateTertimno.estatico)
+                if (Maxy < 14 && !SePuedeBajar())
                 {
                     MoverTetriminoEjeY();
                 }
-                else if (Maxy < 14 &&
-                    (estadosActual[0] == StateTertimno.estatico || estadosActual[1] == StateTertimno.estatico || estadosActual[2] == StateTertimno.estatico || estadosActual[3] == StateTertimno.estatico))
+                else if (Maxy < 14 && SePuedeBajar())
                 {
                     DetenerTetrimino();
                 }
@@ -224,6 +286,7 @@ namespace TetrisCsharp2.Models
                 }
             }
         }
+        // Con este si se levanta, la tecla se baja
         public void VolverANormalidad(Keys tecla = Keys.NoName)
         {
             if (tecla == Keys.W || tecla == Keys.Up)
@@ -241,7 +304,7 @@ namespace TetrisCsharp2.Models
 
         }
     }
-
+    #endregion
 }
 
 
